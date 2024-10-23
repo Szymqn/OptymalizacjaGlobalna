@@ -11,3 +11,8 @@ To repozytorium zawiera rozwiązania zadań z przedmiotu **Optymalizacja Globaln
 ### Metody Selekcji
 
 [Przejdź do laboratorium](https://github.com/Szymqn/OptymalizacjaGlobalna/tree/master/lab02)
+
+## 3. Laboratorium
+### Operatory genetyczne (mutacja i inwersja)
+
+[Przejdź do laboratorium](https://github.com/Szymqn/OptymalizacjaGlobalna/tree/master/lab03)
