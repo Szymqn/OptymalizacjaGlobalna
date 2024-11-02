@@ -16,3 +16,8 @@ To repozytorium zawiera rozwiązania zadań z przedmiotu **Optymalizacja Globaln
 ### Operatory genetyczne (mutacja i inwersja)
 
 [Przejdź do laboratorium](https://github.com/Szymqn/OptymalizacjaGlobalna/tree/master/lab03)
+
+## 4. Laboratorium
+### Operatory genetyczne (krzyżowanie)
+
+[Przejdź do laboratorium](https://github.com/Szymqn/OptymalizacjaGlobalna/tree/master/lab04)
