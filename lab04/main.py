@@ -28,54 +28,65 @@ def uniform_crossover(parent1, parent2):
     return offspring1, offspring2
 
 
-def create_population(size, dim):
-    return [np.random.uniform(-2, 2, dim) for _ in range(size)]
+def even_crossover(parent1, parent2):
+    mask = np.random.randint(2, size=len(parent1))
+    offspring1 = np.where(mask == 0, parent1, parent2)
+    offspring2 = np.where(mask == 0, parent2, parent1)
+    return offspring1, offspring2
 
 
-def select_parents(population, fitness, pk):
-    selected = []
-    for i, individual in enumerate(population):
-        if random.random() < pk:
-            selected.append(individual)
-    if len(selected) % 2 == 1:
-        selected.pop()
-    return selected
+def create_population(size):
+    return [np.random.randint(0, 2) for _ in range(size)], round(random.random(), 2)
 
 
-def genetic_algorithm(dim, generations, pop_size, pk, crossover_type):
-    population = create_population(pop_size, dim)
-    for generation in range(generations):
-        fitness = [rastrigin(individual) for individual in population]
-        parents = select_parents(population, fitness, pk)
+def genetic_algorithm(dim, pop_size, pk, crossover_type):
+    populations = []
+    indexes = []
 
-        offspring = []
-        for i in range(0, len(parents), 2):
-            if crossover_type == 'single':
-                children = single_point_crossover(parents[i], parents[i + 1])
-            elif crossover_type == 'two':
-                children = two_point_crossover(parents[i], parents[i + 1])
-            elif crossover_type == 'uniform':
-                children = uniform_crossover(parents[i], parents[i + 1])
-            offspring.extend(children)
+    for i in range(dim):
+        population, num = create_population(pop_size)
+        populations.append(population)
 
-        population.extend(offspring)
-        population.sort(key=rastrigin)
-        population = population[:pop_size]
+        print("Started population:", population, num)
+        if num < pk:
+            indexes.append(population)
+            populations.remove(population)
 
-        best_individual = population[0]
-        best_fitness = rastrigin(best_individual)
-        print(f"Pokolenie {generation}: Najlepsza wartość funkcji = {best_fitness}")
+    if len(indexes) % 2 == 1:
+        indexes.append(random.choice(populations))
 
-    return best_individual, best_fitness
+    print("Selected indexes:", indexes)
+
+    random.shuffle(indexes)
+    paired_indexes = [(indexes[i], indexes[i + 1]) for i in range(0, len(indexes), 2)]
+
+    print("Paired indexes:", paired_indexes)
+
+    crossover = None
+    match crossover_type:
+        case 'single':
+            crossover = single_point_crossover
+        case 'two':
+            crossover = two_point_crossover
+        case 'uniform':
+            crossover = uniform_crossover
+        case 'even':
+            crossover = even_crossover
+
+    for pair in paired_indexes:
+        offspring1, offspring2 = crossover(pair[0], pair[1])
+        print("Offspring1:", offspring1)
+        print("Offspring2:", offspring2)
+
+    return 1, 2
 
 
 if __name__ == '__main__':
-    dim = 5
-    generations = 50
+    dim = 10
     pop_size = 10
-    pk = 0.7
-    crossover_type = 'two'
+    pk = 0.5
+    crossover_type = 'even'
 
-    best_solution, best_value = genetic_algorithm(dim, generations, pop_size, pk, crossover_type)
+    best_solution, best_value = genetic_algorithm(dim, pop_size, pk, crossover_type)
     print("Najlepsze rozwiązanie:", best_solution)
     print("Najlepsza wartość funkcji:", best_value)
