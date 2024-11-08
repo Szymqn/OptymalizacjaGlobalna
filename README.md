@@ -21,3 +21,8 @@ To repozytorium zawiera rozwiązania zadań z przedmiotu **Optymalizacja Globaln
 ### Operatory genetyczne (krzyżowanie)
 
 [Przejdź do laboratorium](https://github.com/Szymqn/OptymalizacjaGlobalna/tree/master/lab04)
+
+## 5. Laboratorium
+### Sukcesja
+
+[Przejdź do laboratorium](https://github.com/Szymqn/OptymalizacjaGlobalna/tree/master/lab05)
