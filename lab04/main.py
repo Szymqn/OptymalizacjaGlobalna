@@ -78,15 +78,11 @@ def genetic_algorithm(dim, pop_size, pk, crossover_type):
         print("Offspring1:", offspring1)
         print("Offspring2:", offspring2)
 
-    return 1, 2
-
 
 if __name__ == '__main__':
     dim = 10
     pop_size = 10
     pk = 0.5
-    crossover_type = 'even'
+    crossover_type = 'single'
 
-    best_solution, best_value = genetic_algorithm(dim, pop_size, pk, crossover_type)
-    print("Najlepsze rozwiązanie:", best_solution)
-    print("Najlepsza wartość funkcji:", best_value)
+    genetic_algorithm(dim, pop_size, pk, crossover_type)
