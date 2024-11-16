@@ -39,6 +39,13 @@ def create_population(size):
     return [np.random.randint(0, 2) for _ in range(size)], round(random.random(), 2)
 
 
+def two_point_crossover(parent1, parent2):
+    points = sorted(random.sample(range(1, len(parent1)), 2))
+    offspring1 = np.concatenate((parent1[:points[0]], parent2[points[0]:points[1]], parent1[points[1]:]))
+    offspring2 = np.concatenate((parent2[:points[0]], parent1[points[0]:points[1]], parent2[points[1]:]))
+    return offspring1, offspring2
+
+
 def genetic_algorithm(dim, pop_size, pk):
     populations = []
     indexes = []
@@ -52,6 +59,19 @@ def genetic_algorithm(dim, pop_size, pk):
             indexes.append(population)
             populations.remove(population)
             cross += 1
+
+    if len(indexes) % 2 == 1:
+        indexes.append(random.choice(populations))
+
+    print("Selected indexes:", indexes)
+
+    random.shuffle(indexes)
+    paired_indexes = [(indexes[i], indexes[i + 1]) for i in range(0, len(indexes), 2)]
+
+    for pair in paired_indexes:
+        offspring1, offspring2 = two_point_crossover(pair[0], pair[1])
+        print("Offspring1:", offspring1)
+        print("Offspring2:", offspring2)
 
     return cross
 
