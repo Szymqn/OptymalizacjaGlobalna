@@ -1,36 +1,40 @@
 import random
 import numpy as np
 
-from lab01.main import rastrigin
 
-
-def n_dimensional_mutation(chromosom, pm=0.1):
-    for i in range(len(chromosom)):
-        r = random.random()
+def n_dimensional_mutation(pop, pm=0.1):
+    for i in range(len(pop)):
+        r = random.uniform(0, 1)
         if r < pm:
-            chromosom[i] += random.uniform(-0.1, 0.1)
-    return chromosom
+            for j in range(len(pop[i])):
+                pop[i][j] = 1 if pop[i][j] == 0 else 0
+    return pop
 
 
-def n_dimensional_inversion(chromosom, pi=0.1):
-    r = random.random()
-    if r < pi:
-        punkt1 = random.randint(0, len(chromosom) - 1)
-        punkt2 = random.randint(0, len(chromosom) - 1)
-        if punkt1 > punkt2:
-            punkt1, punkt2 = punkt2, punkt1
-        chromosom[punkt1:punkt2+1] = chromosom[punkt1:punkt2+1][::-1]
-    return chromosom
+def n_dimensional_inversion(pop, pi=0.1):
+    for i in range(len(pop)):
+        r = random.uniform(0, 1)
+        if r < pi:
+            punkt1 = random.randint(0, len(pop[i]) - 1)
+            punkt2 = random.randint(0, len(pop[i]) - 1)
+            if punkt1 > punkt2:
+                punkt1, punkt2 = punkt2, punkt1
+            pop[i][punkt1:punkt2 + 1] = pop[i][punkt1:punkt2 + 1][::-1]
+    return pop
+
+
+def initialize_population(pop_size, dim):
+    return np.random.randint(0, 2, (pop_size, dim))
 
 
 if __name__ == '__main__':
-    n_dim_chromosome = np.random.rand(10)
+    pop_size = 10
+    dim = 5
+    population = initialize_population(pop_size, dim)
+    print("Population:\n", population)
 
-    n_dimensional_mutation(n_dim_chromosome, pm=0.2)
-    n_dimensional_inversion(n_dim_chromosome, pi=0.2)
+    mutation = n_dimensional_mutation(population, pm=0.2)
+    inversion = n_dimensional_inversion(population, pi=0.8)
 
-    print(n_dim_chromosome)
-
-    rastrigin_chromosome = np.random.uniform(-5.12, 5.12, 10)
-    result = rastrigin(rastrigin_chromosome)
-    print(result)
+    print("Mutation:\n", mutation)
+    print("Inversion:\n", inversion)
