@@ -26,3 +26,8 @@ To repozytorium zawiera rozwiązania zadań z przedmiotu **Optymalizacja Globaln
 ### Sukcesja
 
 [Przejdź do laboratorium](https://github.com/Szymqn/OptymalizacjaGlobalna/tree/master/lab05)
+
+## 6 Laboratorium
+### Sprawozdanie
+
+[Przejdź do laboratorium](https://github.com/Szymqn/OptymalizacjaGlobalna/tree/master/lab6)
