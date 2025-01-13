@@ -31,3 +31,8 @@ To repozytorium zawiera rozwiązania zadań z przedmiotu **Optymalizacja Globaln
 ### Sprawozdanie
 
 [Przejdź do laboratorium](https://github.com/Szymqn/OptymalizacjaGlobalna/tree/master/lab06)
+
+## Projekt
+### Algorytm genetyczny do rozwiązywania problemu komiwojażera - reprezentacja ścieżkowa.
+
+[Przejdź do laboratorium](https://github.com/Szymqn/OptymalizacjaGlobalna/tree/master/project)
