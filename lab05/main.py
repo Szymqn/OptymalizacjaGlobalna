@@ -1,5 +1,7 @@
 import numpy as np
 
+from lab01.main import calculate_binary_length, generate_binary_population
+
 
 def fitness_function(X):
     A = 10
@@ -90,7 +92,13 @@ if __name__ == '__main__':
     REPLACEMENT_TYPE = "random"
     REPLACEMENT_RATE = 0.5
 
-    population = initialize_population()
+    dimensions = 2
+    bounds = [(-5.12, 5.12)] * dimensions
+    num_bits = [calculate_binary_length(bounds[i][0], bounds[i][1], 1) for i in range(dimensions)]
+    chromosome_length = sum(num_bits)
+    population_size = 10
+
+    population = generate_binary_population(population_size, chromosome_length)
 
     for gen in range(GENS):
         fitness_values = np.array([fitness_function(ind) for ind in population])

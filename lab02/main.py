@@ -1,6 +1,6 @@
 import numpy as np
 
-from lab01.main import rastrigin
+from lab01.main import rastrigin, calculate_binary_length, generate_binary_population
 
 
 def tournament_selection(population, fitness_func, tournament_size, with_replacement=True, minimize=True):
@@ -65,7 +65,16 @@ def roulette_wheel_selection(population, fitness_func, minimize=True):
 
 
 if __name__ == '__main__':
-    population = [np.array([1, 2]), np.array([3, 4]), np.array([5, 6]), np.array([7, 8])]
+    # population = [np.array([1, 2]), np.array([3, 4]), np.array([5, 6]), np.array([7, 8])]
+    # fitness_func = lambda x: rastrigin(x)
+
+    dimensions = 2
+    bounds = [(-5.12, 5.12)] * dimensions
+    num_bits = [calculate_binary_length(bounds[i][0], bounds[i][1], 1) for i in range(dimensions)]
+    chromosome_length = sum(num_bits)
+    population_size = 10
+
+    population = generate_binary_population(population_size, chromosome_length)
     fitness_func = lambda x: rastrigin(x)
 
     new_population_tournament = tournament_selection(population, fitness_func, tournament_size=2,

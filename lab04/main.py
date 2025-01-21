@@ -2,11 +2,6 @@ import numpy as np
 import random
 
 
-def rastrigin(X):
-    A = 10
-    return A * len(X) + sum([(x ** 2 - A * np.cos(2 * np.pi * x)) for x in X])
-
-
 def single_point_crossover(parent1, parent2):
     point = random.randint(1, len(parent1) - 1)
     offspring1 = np.concatenate((parent1[:point], parent2[point:]))

@@ -1,6 +1,8 @@
 import random
 import numpy as np
 
+from lab01.main import calculate_binary_length, generate_binary_population
+
 
 def n_dimensional_mutation(pop, pm=0.1):
     for i in range(len(pop)):
@@ -28,9 +30,14 @@ def initialize_population(pop_size, dim):
 
 
 if __name__ == '__main__':
-    pop_size = 10
-    dim = 5
-    population = initialize_population(pop_size, dim)
+
+    dimensions = 2
+    bounds = [(-5.12, 5.12)] * dimensions
+    num_bits = [calculate_binary_length(bounds[i][0], bounds[i][1], 1) for i in range(dimensions)]
+    chromosome_length = sum(num_bits)
+    population_size = 10
+
+    population = generate_binary_population(population_size, chromosome_length)
     print("Population:\n", population)
 
     mutation = n_dimensional_mutation(population, pm=0.2)
